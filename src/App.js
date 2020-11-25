@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SearchWIKI from './components/SearchWIKI'
 import Accordion from './components/Accordion'
+import Dropdown from './components/Dropdown'
 
 
 const AccordionItems = [
@@ -16,13 +17,47 @@ const AccordionItems = [
         title: 'How do you use React?',
         content: 'You use React by creating components'
     }
-]
+];
+
+
+const DropdownOptions = [
+    {
+        label: 'Red',
+        value: 'red'
+    },
+    {
+        label: 'Green',
+        value: 'green'
+    },
+    {
+        label: 'Blue',
+        value: 'blue'
+    }
+];
 
 export default () => {
+    const [selection, setSelection] = useState(DropdownOptions[0]);
+    const [showDropdown, setShowDropdown] = useState(false);
+
     return (
         <div>
-            <br/>
-            <Accordion items={AccordionItems}/>
+            <button 
+                onClick={() => setShowDropdown(!showDropdown)}
+                style={{ margin:'5px' }}
+            >
+                {
+                    showDropdown ? 'Hide dropdown' : 'Show dropdown'
+                }
+            </button>
+            {           
+                showDropdown ?  
+                <Dropdown 
+                    text="Select a color" 
+                    selection={selection} 
+                    onSelectionChange={setSelection} 
+                    options={DropdownOptions}
+                /> : null
+            }
         </div>
     );
 }
