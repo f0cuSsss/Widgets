@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-const Dropdown = ({ text, selection, onSelectionChange, options }) => {
+const Dropdown = ({ label, selection, onSelectedChange, options }) => {
     const [open, setOpen] = useState(false);
     const ref = useRef();
-
     
     useEffect(() => {
         const onBodyClick = e => {
@@ -23,14 +22,15 @@ const Dropdown = ({ text, selection, onSelectionChange, options }) => {
     }, []);
 
     const renderedOptions = options.map(option => {
-        if(selection.label === option.label)
-                return;
+        if(selection.label === option.label) {
+            return;
+        }
 
         return (
             <div 
                 className="item" 
                 key={option.value}
-                onClick={() => onSelectionChange(option)}
+                onClick={() => onSelectedChange(option)}
             >
                 {option.label}
             </div>
@@ -40,7 +40,7 @@ const Dropdown = ({ text, selection, onSelectionChange, options }) => {
     return (
         <div ref={ref} className="ui form">
             <div className="field">
-                <label className="label">{text}</label>
+                <label className="label">{label}</label>
                 <div 
                     className={`ui selection dropdown ${open ? `visible active` : ''}`}
                     onClick={() => setOpen(!open)}
