@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import SearchWIKI from './components/SearchWIKI'
 import Accordion from './components/Accordion'
 import Dropdown from './components/Dropdown'
+import Translate from './components/Translation/Translate'
 
 
 const AccordionItems = [
@@ -36,9 +37,20 @@ const DropdownOptions = [
 ];
 
 export default () => {
+    
+    return (
+        <div>
+            <Translate />
+        </div>
+    );
+    
+
+    /* DROPDOWN
+        
     const [selection, setSelection] = useState(DropdownOptions[0]);
     const [showDropdown, setShowDropdown] = useState(false);
 
+    
     return (
         <div>
             <button 
@@ -52,12 +64,13 @@ export default () => {
             {           
                 showDropdown ?  
                 <Dropdown 
-                    text="Select a color" 
+                    label="Select a color" 
                     selection={selection} 
-                    onSelectionChange={setSelection} 
+                    onSelectedChange={setSelection} 
                     options={DropdownOptions}
                 /> : null
             }
         </div>
     );
+    */
 }
