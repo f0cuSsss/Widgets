@@ -3,6 +3,9 @@ import SearchWIKI from './components/SearchWIKI'
 import Accordion from './components/Accordion'
 import Dropdown from './components/Dropdown'
 import Translate from './components/Translation/Translate'
+import Header from './components/Navigation/Header'
+import Route from './components/Navigation/Route'
+import SearchWIKi from './components/SearchWIKI'
 
 
 const AccordionItems = [
@@ -36,41 +39,31 @@ const DropdownOptions = [
     }
 ];
 
-export default () => {
-    
+export default () => { 
+    const [selected, setSelected] = useState(DropdownOptions[0]);
+
     return (
         <div>
-            <Translate />
-        </div>
-    );
-    
+            <Header />
 
-    /* DROPDOWN
-        
-    const [selection, setSelection] = useState(DropdownOptions[0]);
-    const [showDropdown, setShowDropdown] = useState(false);
-
-    
-    return (
-        <div>
-            <button 
-                onClick={() => setShowDropdown(!showDropdown)}
-                style={{ margin:'5px' }}
-            >
-                {
-                    showDropdown ? 'Hide dropdown' : 'Show dropdown'
-                }
-            </button>
-            {           
-                showDropdown ?  
+            <Route path="/">
+                <Accordion items={AccordionItems}/>
+            </Route>
+            <Route path="/wiki">
+                <SearchWIKi />
+            </Route>
+            <Route path="/dropdown">
                 <Dropdown 
-                    label="Select a color" 
-                    selection={selection} 
-                    onSelectedChange={setSelection} 
+                    label="Select a color"
+                    selected={selected}
+                    onSelectedChange={setSelected}
                     options={DropdownOptions}
-                /> : null
-            }
+                />
+            </Route>
+            <Route path="/translate">
+                <Translate />
+            </Route>
         </div>
     );
-    */
+    
 }
